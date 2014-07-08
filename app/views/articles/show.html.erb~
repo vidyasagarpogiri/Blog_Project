@@ -1,0 +1,42 @@
+
+<h1> List</h1>
+<hr>
+<b>Article Id:</b> <%= @article.id %><br>
+<b>title:</b> <%= @article.title %><br>
+<b>Desc :</b>  <%= @article.description %> <br>
+<b>Category:</b> <%= @article.category %><br>
+<b>tags: </b> <%= @article.tags %><br><br>
+
+
+<h2>Comments</h2>
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+
+<h2>Add a comment:</h2>
+<%= form_for([@article, @article.comments.build]) do |f| %>
+  <p>
+    <%= f.label :commenter %><br>
+    <%= f.text_field :commenter %>
+  </p>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', articles_path %>
+<%= link_to 'Edit', edit_article_path(@article) %>
+
+
